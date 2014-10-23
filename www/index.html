@@ -4,6 +4,8 @@
   <title>Geit í Myllu</title>
   <link rel='stylesheet prefetch' href='http://getbootstrap.com/2.3.2/assets/css/bootstrap.css'>
   <link rel="stylesheet" type="text/css" href="css/mylla.css"></head>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="js/mylla.js"></script>
   <meta charset="utf-8">
 </head>
 <body>
@@ -11,6 +13,14 @@
     <div class="span3 new_span">
       <div class="row">
         <h1 class="span3">Tic Tac Toe</h1>
+        <div class="span3">
+          <div class="input-prepend input-append">
+            <span class="add-on win_text">O won</span><strong id="o_win" class="win_times add-on">0</strong><span class="add-on">time(s)</span>
+          </div>
+          <div class="input-prepend input-append">
+            <span class="add-on win_text">X won</span><strong id="x_win" class="win_times add-on">0</strong><span class="add-on">time(s)</span>
+          </div>
+        </div>
       </div>
       <ul class="row" id="game">
         <li id="one" class="btn span1" >+</li>
