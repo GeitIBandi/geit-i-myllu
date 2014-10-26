@@ -1,0 +1,3 @@
+#!/bin/bash
+
+javac -classpath "classes:lib/junit-4.11.jar" src/main/java/is/ru/geitibandi/geitimyllu/GeitIMyllu.java -d classes

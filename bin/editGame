@@ -1,0 +1,4 @@
+#!/bin/bash
+
+nano src/main/java/is/ru/geitibandi/geitimyllu/GeitIMyllu.java
+

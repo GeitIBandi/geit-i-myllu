@@ -1,0 +1,4 @@
+#!/bin/bash
+
+javac -cp "classes:lib/junit-4.11.jar" src/test/java/is/ru/geitibandi/geitimyllu/GeitIMylluTest.java -d classes
+
