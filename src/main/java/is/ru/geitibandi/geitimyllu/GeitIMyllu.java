@@ -6,7 +6,7 @@ public class GeitIMyllu {
     /////////////// MANDATORY METHODS ///////////////
     // The following methods must be implemented to get at least a working version
     // of the game
-    public char[][] board;
+    private char[][] board;
     private int gameState;
     private int turn;
     private int playedGames;
@@ -153,7 +153,7 @@ public class GeitIMyllu {
 	if(row < 0 || row > 2 || col < 0 || col > 2){
 	    throw new IllegalArgumentException("Cell not on board");
 	}
-        else if(board[row][col] != '-') {
+        else if(getCell(row,col) != '-') {
 	    throw new IllegalArgumentException("Cell occupied");
 	}
 	else if(gameWon() == true || boardFull() == true) {
@@ -185,7 +185,7 @@ public class GeitIMyllu {
     }
 
     // Set function for gameState
-    public void setGameState(int value) {
+    private void setGameState(int value) {
 	gameState = value;
     }
 

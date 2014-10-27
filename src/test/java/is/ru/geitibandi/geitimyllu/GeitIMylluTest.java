@@ -57,7 +57,7 @@ public class GeitIMylluTest {
     @Test
     public void playExceptionIfCellOccupied(){
 	boolean thrown = false;
-	game.board[0][0] = 'X';
+	game.play(0,0);
 	try {
 	    game.play(0,0);
 	} catch (IllegalArgumentException e) {
@@ -81,48 +81,59 @@ public class GeitIMylluTest {
 
     @Test
     public void gameOverRow() {
-	game.board[1][0] = 'X';
-	game.board[1][1] = 'X';
-	game.board[1][2] = 'X';
+	game.play(1,0);
+	game.play(0,2);
+	game.play(1,1);
+	game.play(2,2);
+	game.play(1,2);
 	assertTrue(game.checkRowsForWin());
     }
 
     @Test
     public void gameOverColum() {
-	game.board[0][1] = 'O';
-	game.board[1][1] = 'O';
-	game.board[2][1] = 'O';
+	game.play(0,1);
+	game.play(1,2);
+	game.play(1,1);
+	game.play(2,2);
+	game.play(2,1);
 	assertTrue(game.checkColsForWin());
     }
 
     @Test
     public void gameOverDiag() {
-	game.board[0][0] = 'X';
-	game.board[1][1] = 'X';
-	game.board[2][2] = 'X';
+	game.play(0,0);
+	game.play(1,2);
+	game.play(1,1);
+	game.play(0,1);
+	game.play(2,2);
 	assertTrue(game.checkDiagForWin());
     }
 
     @Test
     public void gameOverTest() {
-	game.board[0][0] = 'X';
-	game.board[1][1] = 'X';
-	game.board[2][2] = 'X';
+	game.play(0,0);
+	game.play(2,1);
+	game.play(1,1);
+	game.play(1,2);
+	game.play(2,2);
 	assertTrue(game.gameWon());
     }
     @Test
     public void boardFullTest() {
-	for(int i = 0; i < 3; i++){
-	    for(int j = 0; j < 3; j++){
-		game.board[i][j] = 'X';
-	    }
-	}
+	game.play(0,0);
+        game.play(0,1);
+        game.play(0,2);
+        game.play(1,1);
+        game.play(1,0);
+        game.play(2,0);
+        game.play(1,2);
+        game.play(2,2);
+        game.play(2,1);
 	assertTrue(game.boardFull());
     }
 
     @Test
     public void playerMarkIfGameStateIs1(){
-	game.setGameState(1);
 	final char value = 'X';
 	char result = game.playerMark();
 	assertEquals(value, result);
@@ -130,13 +141,21 @@ public class GeitIMylluTest {
 
     @Test
     public void playerMarkIfGameStateIs2(){
-	game.setGameState(2);
+	game.play(1,1);
 	assertEquals('O', game.playerMark());
     }
 
     @Test
     public void playerMarkIfGameStateIs5(){
-	game.setGameState(5);
+	game.play(0,0);
+        game.play(0,1);
+        game.play(0,2);
+        game.play(1,1);
+        game.play(1,0);
+        game.play(2,0);
+        game.play(1,2);
+        game.play(2,2);
+        game.play(2,1);
 	assertEquals('-', game.playerMark());
     }
 
@@ -145,7 +164,7 @@ public class GeitIMylluTest {
 	game.play(2,1);
 	game.play(1,1);
 	game.resetGame();
-	assertEquals('-', game.board[1][1]);
+	assertEquals('-', game.getCell(1,1));
     }
 
     @Test
