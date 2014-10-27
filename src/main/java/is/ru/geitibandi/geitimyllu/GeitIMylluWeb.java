@@ -21,10 +21,17 @@ public class GeitIMylluWeb implements SparkApplication {
             }
         });
 
-        post(new Route("/api/v1/play/:nr"){
+        post(new Route("/api/v1/play/:row/:col"){
             @Override
             public Object handle(Request request, Response response){
-                return game.play(Integer.parseInt(":param"));
+                try {
+                    game.play(Integer.parseInt(":row"), Integer.parseInt(":col"));
+                }
+                catch (IllegalArgumentException e) {
+                    response.status(403);
+                    response.body(e.getMessage());
+                }
+                return "";
             }
         });
     }
