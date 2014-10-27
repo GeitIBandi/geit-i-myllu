@@ -1,29 +1,32 @@
 package is.ru.geitibandi.geitimyllu;
 
-import spark.*;
-import static spark.Spark.*;
+import spark.Route;
+import spark.Request;
+import spark.Response;
+import static spark.Spark.get;
+import static spark.Spark.post;
 import spark.servlet.SparkApplication;
 
 // Class that handles incoming web requests and sends RESTful responses in return
 public class GeitIMylluWeb implements SparkApplication {
-    private final static String apiUrl = "/api/v1";
+    private static final String API_URL = "/api/v1";
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SparkApplication webapp = new GeitIMylluWeb();
         webapp.init();
     }
 
-    public void init(){
+    public void init() {
         final GeitIMyllu game = new GeitIMyllu();
 
-        get(new Route(apiUrl + "/state") {
+        get(new Route(API_URL + "/state") {
             @Override
             public Object handle(Request request, Response response) {
                 return game.getGameState();
             }
         });
 
-        post(new Route(apiUrl + "/play/:row/:col") {
+        post(new Route(API_URL + "/play/:row/:col") {
             @Override
             public Object handle(Request request, Response response) {
                 try {
@@ -37,7 +40,7 @@ public class GeitIMylluWeb implements SparkApplication {
             }
         });
 
-        post(new Route(apiUrl + "/reset") {
+        post(new Route(API_URL + "/reset") {
             @Override
             public Object handle(Request request, Response response) {
                 game.resetGame();
@@ -45,43 +48,47 @@ public class GeitIMylluWeb implements SparkApplication {
             }
         });
 
-        get(new Route(apiUrl + "/board") {
+        get(new Route(API_URL + "/board") {
             @Override
             public Object handle(Request request, Response response) {
                 return game.boardAsString();
             }
         });
 
-        get(new Route(apiUrl + "/turn") {
+        get(new Route(API_URL + "/turn") {
             @Override
             public Object handle(Request request, Response response) {
                 return game.getTurn();
             }
         });
 
-        get(new Route(apiUrl + "/whosturn") {
+        get(new Route(API_URL + "/whosturn") {
             public Object handle(Request request, Response response) {
                 return game.getCurrentPlayer();
             }
         });
 
-        get(new Route(apiUrl + "/played") {
+        get(new Route(API_URL + "/played") {
             public Object handle(Request request, Response response) {
                 return game.getPlayedGames();
             }
         });
 
-        get(new Route(apiUrl + "/won") {
+        get(new Route(API_URL + "/won") {
             public Object handle(Request request, Response response) {
                 boolean gameWon = game.gameWon();
                 boolean boardFull = game.boardFull();
-                char winner = (gameWon ? game.getCurrentPlayer() :
-                    (boardFull ? 'T' : 'N'));
-                return winner;
+                if (gameWon) {
+                    return game.getCurrentPlayer();
+                }
+                else if (boardFull) {
+                    return 'T';
+                }
+                return 'N';
             }
         });
 
-        get(new Route(apiUrl + "/won/:player") {
+        get(new Route(API_URL + "/won/:player") {
             public Object handle(Request request, Response response) {
                 String playerStr = ":player";
                 char player = playerStr.charAt(0);
@@ -97,7 +104,7 @@ public class GeitIMylluWeb implements SparkApplication {
             }
         });
 
-        get(new Route(apiUrl + "/ties") {
+        get(new Route(API_URL + "/ties") {
             public Object handle(Request request, Response response) {
                 return game.getTies();
             }
