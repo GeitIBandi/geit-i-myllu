@@ -1,1 +1,1 @@
-web:    build/intall/geit-i-myllu/bin/geit-i-myllu
+web:    build/install/geit-i-myllu/bin/geit-i-myllu
