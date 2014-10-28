@@ -13,6 +13,10 @@ public class GeitIMylluWeb implements SparkApplication {
 
     public static void main(String[] args) {
         SparkApplication webapp = new GeitIMylluWeb();
+        String port = System.getenv("PORT");
+        if (port != null) {
+            setPort(Integer.valueOf(port));
+        }
         webapp.init();
     }
 
