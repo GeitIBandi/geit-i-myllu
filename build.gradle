@@ -44,10 +44,6 @@ dependencies {
     testCompile 'junit:junit:4.11'
 }
 
-task stage {
-    dependsOn check, jacocoTestReport, copyReports, installApp
-}
-
 jacocoTestReport {
     group = "Reporting"
     description = "Generate Jacoco coverage reports after running tests."
@@ -57,5 +53,9 @@ jacocoTestReport {
 task copyReports(dependsOn: jacocoTestReport, type: Copy) {
     from 'build/reports'
     into 'src/main/resources/public/reports'
+}
+
+task stage {
+    dependsOn check, jacocoTestReport, copyReports, installApp
 }
 
