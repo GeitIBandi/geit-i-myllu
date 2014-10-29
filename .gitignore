@@ -1,6 +1,7 @@
 *.class
 .gradle
 build
+src/main/resources/public/reports
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
