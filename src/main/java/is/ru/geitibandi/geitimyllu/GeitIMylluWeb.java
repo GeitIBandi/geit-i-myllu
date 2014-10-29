@@ -6,6 +6,7 @@ import spark.Response;
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.setPort;
+import static spark.Spark.staticFileLocation;
 import spark.servlet.SparkApplication;
 
 // Class that handles incoming web requests and sends RESTful responses in return
@@ -13,6 +14,7 @@ public class GeitIMylluWeb implements SparkApplication {
     private static final String API_URL = "/api/v1";
 
     public static void main(String[] args) {
+        staticFileLocation("/public");
         SparkApplication webapp = new GeitIMylluWeb();
         String port = System.getenv("PORT");
         if (port != null) {

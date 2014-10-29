@@ -45,5 +45,17 @@ dependencies {
 }
 
 task stage {
-    dependsOn installApp
+    dependsOn check, jacocoTestReport, copyReports, installApp
 }
+
+jacocoTestReport {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
+}
+
+task copyReports(dependsOn: jacocoTestReport, type: Copy) {
+    from 'build/reports'
+    into 'src/main/resources/public/reports'
+}
+
