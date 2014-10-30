@@ -1,4 +1,0 @@
-#!/bin/bash
-
-nano src/test/java/is/ru/geitibandi/geitimyllu/GeitIMylluTest.java
-
