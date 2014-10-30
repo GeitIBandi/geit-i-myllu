@@ -85,7 +85,7 @@ task seleniumXvfb(type: Test, dependsOn: installApp) {
     }
 }
 
-jacocoTestReport(dependsOn: seleniumXvfb) {
+jacocoTestReport {
     group = "Reporting"
     description = "Generate Jacoco coverage reports after running tests."
     additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)

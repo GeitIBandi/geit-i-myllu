@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 
 public class GeitIMylluWebTest {
 
-    static WebDriver driver;
+    private static WebDriver driver;
 
     @BeforeClass
     public static void before() {
@@ -27,19 +27,18 @@ public class GeitIMylluWebTest {
     }
 
     @Before
-    public void setup() {
+    public void setUp() {
         // Will be run before each test in class is run
-        ;
     }
 
     @Test
     public void assertNameInJoke() {
         String port = System.getenv("PORT");
-        if(port == null){
-            port = "4567";
+        if (port == null) {
+            port = "80";
         }
-        driver.get("http://localhost:" + port);
+        driver.get("http://geit-i-myllu-staging.herokuapp.com:" + port);
         String bodyText = driver.findElement(By.tagName("body")).getText();
-        assertTrue(bodyText.toLowerCase().contains("chuck norris"));
+        assertTrue(bodyText.toLowerCase().contains("web front"));
     }
 }
