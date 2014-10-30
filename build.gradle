@@ -86,17 +86,13 @@ task seleniumXvfb(type: Test, dependsOn: installApp) {
 }
 
 jacocoTestReport {
+    dependsOn check
     group = "Reporting"
     description = "Generate Jacoco coverage reports after running tests."
     additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
 }
 
-task copyReports(dependsOn: jacocoTestReport, type: Copy) {
-    from 'build/reports'
-    into 'src/main/resources/public/reports'
-}
-
 task stage {
-    dependsOn check, jacocoTestReport, copyReports, installApp
+    dependsOn check, installApp
 }
 
