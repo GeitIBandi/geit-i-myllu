@@ -11,14 +11,7 @@ deploy:
   strategy: git
   app: geit-i-myllu
 before_install:
-- wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
-- git remote add heroku-staging git@heroku.com:geit-i-myllu-staging.git
-- echo "Host heroku.com" >> ~/.ssh/config
-- echo "   StrictHostKeyChecking no" >> ~/.ssh/config
-- echo "   CheckHostIP no" >> ~/.ssh/config
-- echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
-- yes | heroku keys:add
-- git push heroku-staging master
+- bin/deploy.sh
 env:
   global:
   - secure: GUGrjwLgiIpXogO+D77wwwaJZi/QHcVm/5+uGuOJi0c2o6prGE/WTfhFqd0aRH5VKwPLOtw/zwp+8oMAeDusSi4a85wC1PKhS6WbDMeCV4DlbbLVNc8KyMtpfGEHvHttFWV1FS9TFWTxFbyuh6gDeXpaXCe87r/m0madiiU2tEw=
