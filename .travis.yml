@@ -7,7 +7,7 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: ozSFe94mq5R+ZVOWKcJL9+ya46NxCqJ3S9C19Xxt6egLDI5wGH+4zUGBe08tTNSN7hunTcRXKIOaD4Xu16QwPFhzgY9WwoGMabR/bkALUUuDNuiApI6y06PzblzlzAoydJiRUgPK5WnxIW8me/TgYXeTttNXw2gaTDkD8HTS3IQ=
+    secure: h3jJJmdOEizOVdcVHA67utzjd5ph3VYq18hDqa/Lfid3jNgZcfDs8rW92eAvzTVGMyQN8bTxSdyVy39K/SojoY7fG9xvMlCPAo6LKbBFCgwLglIGnF76QY+zYwbjaFgnn9NKp2qDLWFz91LoQzaAlVeQJD5Ik6uuM7yspemCPFs=
   app: geit-i-myllu
 before_install:
 - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
