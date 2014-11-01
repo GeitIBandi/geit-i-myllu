@@ -3,13 +3,22 @@ jdk:
 - openjdk7
 script:
 - ./gradlew check
+- ./gradlew seleniumXvfb
 deploy:
   provider: heroku
   api_key:
-    secure: ozSFe94mq5R+ZVOWKcJL9+ya46NxCqJ3S9C19Xxt6egLDI5wGH+4zUGBe08tTNSN7hunTcRXKIOaD4Xu16QwPFhzgY9WwoGMabR/bkALUUuDNuiApI6y06PzblzlzAoydJiRUgPK5WnxIW8me/TgYXeTttNXw2gaTDkD8HTS3IQ=
-  app:
-    master: geit-i-myllu-staging
-    production: geit-i-myllu
+    secure: h3jJJmdOEizOVdcVHA67utzjd5ph3VYq18hDqa/Lfid3jNgZcfDs8rW92eAvzTVGMyQN8bTxSdyVy39K/SojoY7fG9xvMlCPAo6LKbBFCgwLglIGnF76QY+zYwbjaFgnn9NKp2qDLWFz91LoQzaAlVeQJD5Ik6uuM7yspemCPFs=
+  strategy: git
+  app: geit-i-myllu
+before_install:
+- wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+- git remote add heroku-staging git@heroku.com:geit-i-myllu-staging.git
+- echo "Host heroku.com" >> ~/.ssh/config
+- echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+- echo "   CheckHostIP no" >> ~/.ssh/config
+- echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+- yes | heroku keys:add
+- git push heroku-staging master
 env:
   global:
-    secure: kTIYeU59yaS+GwdTKg9klgrfFf9bEwR2CnkLOAks7sGuwWUwopK7UoNK9KCTrxtcmk78UmkTUD5Bmdsvp8K+C3TuCPztwA58hhHioAJc47Z+1CkFo/hYMb8zWlRrpcxjzBfWh+bud/wUE1mvQDuNIVAvNrbQXxJpXSGow5/UgJo=
+  - secure: GUGrjwLgiIpXogO+D77wwwaJZi/QHcVm/5+uGuOJi0c2o6prGE/WTfhFqd0aRH5VKwPLOtw/zwp+8oMAeDusSi4a85wC1PKhS6WbDMeCV4DlbbLVNc8KyMtpfGEHvHttFWV1FS9TFWTxFbyuh6gDeXpaXCe87r/m0madiiU2tEw=

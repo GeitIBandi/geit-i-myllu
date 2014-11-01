@@ -39,6 +39,6 @@ public class GeitIMylluWebTest {
         }
         driver.get("http://geit-i-myllu-staging.herokuapp.com:" + port);
         String bodyText = driver.findElement(By.tagName("body")).getText();
-        assertTrue(bodyText.toLowerCase().contains("webb front"));
+        assertTrue(bodyText.toLowerCase().contains("web front"));
     }
 }
