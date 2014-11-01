@@ -93,6 +93,6 @@ jacocoTestReport {
 }
 
 task stage {
-    dependsOn check, installApp
+    dependsOn installApp
 }
 
