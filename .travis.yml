@@ -8,6 +8,7 @@ deploy:
   provider: heroku
   api_key:
     secure: h3jJJmdOEizOVdcVHA67utzjd5ph3VYq18hDqa/Lfid3jNgZcfDs8rW92eAvzTVGMyQN8bTxSdyVy39K/SojoY7fG9xvMlCPAo6LKbBFCgwLglIGnF76QY+zYwbjaFgnn9NKp2qDLWFz91LoQzaAlVeQJD5Ik6uuM7yspemCPFs=
+  strategy: git
   app: geit-i-myllu
 before_install:
 - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
