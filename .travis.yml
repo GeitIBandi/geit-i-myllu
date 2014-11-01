@@ -1,13 +1,19 @@
 language: java
 jdk:
   - openjdk7
+script:
+ - ./gradlew check
 deploy:
   provider: heroku
   api_key:
     secure: ozSFe94mq5R+ZVOWKcJL9+ya46NxCqJ3S9C19Xxt6egLDI5wGH+4zUGBe08tTNSN7hunTcRXKIOaD4Xu16QwPFhzgY9WwoGMabR/bkALUUuDNuiApI6y06PzblzlzAoydJiRUgPK5WnxIW8me/TgYXeTttNXw2gaTDkD8HTS3IQ=
-  app:
-    master: geit-i-myllu-staging
-    production: geit-i-myllu
+  app: geit-i-myllu-staging
 before_install:
+- mkdir -p .travis
 - openssl aes-256-cbc -K $encrypted_2dc2647d46a9_key -iv $encrypted_2dc2647d46a9_iv
   -in id_rsa.enc -out .travis/deploy-key.pem -d
+after_success:
+  - chmod 600 .travis/deploy_key.pem
+  - ssh-add .travis/deploy_key.pem
+  - git remote add deploy git@heroku.com:geit-i-myllu.git
+  - git push deploy
