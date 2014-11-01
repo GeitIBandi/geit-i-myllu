@@ -1,4 +1,4 @@
-![](http://imgur.com/ElootDc.png)
+![](http://imgur.com/ElootDc.png){width: 200px}
 
 #Síðannarverkefni
 ##_Design Report_
