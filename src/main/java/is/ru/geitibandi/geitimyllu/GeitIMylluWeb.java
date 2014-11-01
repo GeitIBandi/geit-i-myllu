@@ -37,7 +37,8 @@ public class GeitIMylluWeb implements SparkApplication {
             @Override
             public Object handle(Request request, Response response) {
                 try {
-                    game.play(Integer.parseInt(":row"), Integer.parseInt(":col"));
+                    game.play(Integer.parseInt(request.params(":row")),
+                        Integer.parseInt(request.params(":col")));
                 }
                 catch (IllegalArgumentException e) {
                     response.status(403);
