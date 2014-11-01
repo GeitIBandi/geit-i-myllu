@@ -96,8 +96,3 @@ task stage {
     dependsOn check, installApp
 }
 
-task deploy {
-    
-}
-
-
