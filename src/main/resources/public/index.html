@@ -22,7 +22,7 @@
 #tic-tac-toe li::-webkit-selection {background:none;color:#000;}
 #tic-tac-toe {width:220px; margin:0 auto}
 
-.input-append .win_times {background:#fff; width:101px}
+.input-append .win_times {background:#fff; width:101px; padding:5px}
 .input-append .win_text {width:52px}
 
 body {
@@ -70,10 +70,10 @@ color: #777;
         <h1 class="span3">Tic Tac Toe1</h1>
         <div class="span3">
           <div class="input-prepend input-append">
-            <span class="add-on win_text">O won</span><strong id="o_win" class="win_times add-on">&nbsp;0&nbsp;</strong><span class="add-on">time(s)</span>
+            <span class="add-on win_text">O won</span><strong id="o_win" class="win_times add-on">0</strong><span class="add-on">time(s)</span>
           </div>
           <div class="input-prepend input-append">
-            <span class="add-on win_text">X won</span><strong id="x_win" class="win_times add-on">&nbsp;0&nbsp;</strong><span class="add-on">time(s)</span>
+            <span class="add-on win_text">X won</span><strong id="x_win" class="win_times add-on">0</strong><span class="add-on">time(s)</span>
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@ color: #777;
         <li id="eight" class="btn span1">+</li>
         <li id="nine" class="btn span1">+</li>
       </ul>
-      <div class="clr">&nbsp;</div>
+      <div class="clr"></div>
       <div class="row"><a href="#" id="reset" class="btn-success btn span3" >Restart</a></div>
     </div>
   </div>
@@ -166,7 +166,7 @@ function stateid(){
           console.log("stateid() = state " + data)
           if(data == 3 && yubb == "yubb")
           {
-            $("#x_win").empty().append("&nbsp;"+xwon+"&nbsp;");
+            $("#x_win").empty().append(xwon);
             xwon++;
             alert("X wins");
             yubb = "nobb";
@@ -174,7 +174,7 @@ function stateid(){
           else if(data == 4 && yubb == "yubb")
           {
             //alert("O vann")
-            $("#o_win").empty().append("&nbsp;"+owon+"&nbsp;");
+            $("#o_win").empty().append(owon);
             owon++;
             alert("O wins");
             yubb = "nobb";
