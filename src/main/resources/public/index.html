@@ -52,22 +52,12 @@ color: #777;
 }
 
 </style>
-  <!--
-  <link rel='stylesheet prefetch' href='http://getbootstrap.com/2.3.2/assets/css/bootstrap.css'>
-  <link rel="stylesheet" type="text/css" href="www/css/mylla.css">
-  -->
-  <!--
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.8.10/themes/smoothness/jquery-ui.css" type="text/css">
-	<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
--->
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.8.10/themes/smoothness/jquery-ui.css" type="text/css">
-  <!--<link rel='stylesheet prefetch' href='https://getbootstrap.com/2.3.2/assets/css/bootstrap.css'>-->
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.8.10/themes/smoothness/jquery-ui.css" >
+ 
 
-	
 </head>
   
   <script src="../../../www/js/mylla.js"></script>
@@ -118,14 +108,14 @@ color: #777;
        var playerturn;
        var xwon = 1;
        var owon = 1;
+       var yubb = "yubb";
 function updateWin(){
   //won og uppfæra
    $.ajax({
-      type: "GET",// form.attr('method'),
-      url: "/api/v1/won",//form.att(r'action'),
+      type: "GET",
+      url: "/api/v1/won",
 
       data: null
-      //þarf ekki að senda neitt data, ekkert request.queryParams();
        }).done(function(data) {
         console.log("updateWin(): " + data)
         }).fail(function(data) {
@@ -138,11 +128,10 @@ function updateWin(){
 
 function displayIt(){
   $.ajax({
-      type: "GET",// form.attr('method'),
-      url: "/api/v1/board",//form.att(r'action'),
+      type: "GET",
+      url: "/api/v1/board",
 
       data: null
-      //þarf ekki að senda neitt data, ekkert request.queryParams();
        }).done(function(data) {
          $('#one').empty().append(data[0]);
          $('#two').empty().append(data[1]);
@@ -169,26 +158,26 @@ function stateid(){
       5 - The game is over and it was a tie
 */
   $.ajax({
-      type: "GET",// form.attr('method'),
-      url: "/api/v1/state",//form.att(r'action'),
+      type: "GET",
+      url: "/api/v1/state",
 
       data: null
-      //þarf ekki að senda neitt data, ekkert request.queryParams();
        }).done(function(data) {
           console.log("stateid() = state " + data)
-          if(data == 3)
+          if(data == 3 && yubb == "yubb")
           {
-            //alert("X vann")
             $("#x_win").empty().append("&nbsp;"+xwon+"&nbsp;");
             xwon++;
             alert("X wins");
+            yubb = "nobb";
           }
-          else if(data == 4)
+          else if(data == 4 && yubb == "yubb")
           {
             //alert("O vann")
             $("#o_win").empty().append("&nbsp;"+owon+"&nbsp;");
             owon++;
             alert("O wins");
+            yubb = "nobb";
           }
           else if(data == 5)
           {
@@ -197,9 +186,6 @@ function stateid(){
           else{
             alert("abbababb clicked already")
           }
-
-         
-
         }).fail(function(data) {
           console.log("tokst ekki að displayja hver á að gera")
           
@@ -208,21 +194,16 @@ function stateid(){
 }
 
 function whosTurnIsItAnyway(){
-  //hver á að gera?
 $.ajax({
-      type: "GET",// form.attr('method'),
-      url: "/api/v1/whosturn",//form.att(r'action'),
+      type: "GET",
+      url: "/api/v1/whosturn",
 
       data: null
-      //þarf ekki að senda neitt data, ekkert request.queryParams();
        }).done(function(data) {
            console.log(" whosTurnIsItAnyway() = playerturn: " +data)
           
-
         }).fail(function(data) {
           console.log("tokst ekki að displayja hver á að gera")
-          
-
         });
 }
 
@@ -283,19 +264,13 @@ $(document).ready(function()
       }
       
         $.ajax({
-			       type: "POST",// form.attr('method'),
-			       url: "/api/v1/play/row/col",//form.att(r'action'),
+			       type: "POST",
+			       url: "/api/v1/play/row/col",
               data: "row="+row+"&col="+col
 			 }).done(function(data) {
-				          //console.log( "turn "+ playerturn );
-                  //count++;
                   displayIt();
-				}).fail(function(data) {
-					//alert(data +" abbabb búið að ýta á takkann")
-          //afhverju feilaði þetta, er búið að ýta á takkann eða er einhver búinn að vinna?
+				}).fail(function(data) {			
           stateid();
-
-
 				});
 				eve.preventDefault();
 
@@ -303,23 +278,16 @@ $(document).ready(function()
 
          $('#reset').click(function(eve){
              $.ajax({
-            type: "POST",// form.attr('method'),
-            url: "/api/v1/reset",//form.att( 
+            type: "POST",
+            url: "/api/v1/reset",
               data: null
           }).done(function(){
+            yubb = "yubb";
             displayIt();
           });
         eve.preventDefault();
 
     });
-//document ready
 });
 
-
-
-/*
-
- //whosTurnIsItAnyway();
-}
-*/
 </script> 
