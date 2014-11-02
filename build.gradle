@@ -102,3 +102,4 @@ task stage {
     dependsOn installApp
 }
 
+checkstyleSelenium.enabled = false
