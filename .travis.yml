@@ -4,6 +4,7 @@ jdk:
 script:
 - ./gradlew check
 - ./gradlew seleniumXvfb
+- bin/deploy-code-coverage.sh
 deploy:
   provider: heroku
   api_key:
