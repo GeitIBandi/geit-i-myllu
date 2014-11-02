@@ -3,9 +3,7 @@ jdk:
 - openjdk7
 script:
 - ./gradlew check
-- ./gradlew seleniumXvfb
-- ./gradlew jacocoTestReport
-- bin/deploy-code-coverage.sh
+- ./gradlew seleniumXvfb && ./gradlew jacocoTestReport && bin/deploy-code-coverage.sh
 deploy:
   provider: heroku
   api_key:
