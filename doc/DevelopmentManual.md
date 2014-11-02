@@ -1,5 +1,5 @@
-[](http://imgur.com/S0arjXA.png)
-Síðannarverkefni
+![](http://imgur.com/S0arjXA.png)
+#Síðannarverkefni
 ##_Development Manual_
 
 _Nemendur:_
