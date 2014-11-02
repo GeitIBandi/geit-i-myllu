@@ -111,22 +111,38 @@ color: #777;
        var yubb = "yubb";
 function updateWin(){
   //won og uppfæra
+  
    $.ajax({
-      type: "GET",
-      url: "/api/v1/won",
-
-      data: null
-       }).done(function(data) {
-        console.log("updateWin(): " + data)
-        }).fail(function(data) {
-          console.log("tokst ekki að updateWin()")          
-
-        });
+            type: "GET",
+            url: "/api/v1/state",
+              data: null
+          }).done(function(data){
+            console.log("updatewin: "+data)
+            if(data == 3 && yubb == "yubb")
+            {
+            $("#x_win").empty().append(xwon);
+                xwon++;
+                alert("X wins");
+                yubb = "nobb";
+              }
+             if(data == 4 && yubb == "yubb")
+             {
+             $("#o_win").empty().append(owon);
+                alert("O wins");
+                 owon++;
+                 yubb = "nobb";
+               }
+           if(data == 5)
+            alert("draw")
+          });
+        
 
 }
 
 
 function displayIt(){
+  updateWin();
+
   $.ajax({
       type: "GET",
       url: "/api/v1/board",
@@ -143,55 +159,14 @@ function displayIt(){
          $('#eight').empty().append(data[7]);
          $('#nine').empty().append(data[8]);
          // console.log(data[0]+data[1]+data[2])
+         //updateWin();
         }).fail(function(data) {
           console.log("tokst ekki að displayja boardið")
           
 
         });
 }
-function stateid(){
-  /*
-      1 - The game is running and it’s player X’s turn
-      2 - The game is running and it’s player O’s turn
-      3 - The game is over and player X won
-      4 - The game is over and player O won
-      5 - The game is over and it was a tie
-*/
-  $.ajax({
-      type: "GET",
-      url: "/api/v1/state",
 
-      data: null
-       }).done(function(data) {
-          console.log("stateid() = state " + data)
-          if(data == 3 && yubb == "yubb")
-          {
-            $("#x_win").empty().append(xwon);
-            xwon++;
-            alert("X wins");
-            yubb = "nobb";
-          }
-          else if(data == 4 && yubb == "yubb")
-          {
-            //alert("O vann")
-            $("#o_win").empty().append(owon);
-            owon++;
-            alert("O wins");
-            yubb = "nobb";
-          }
-          else if(data == 5)
-          {
-            alert("draw")
-          }
-          else{
-            alert("abbababb clicked already")
-          }
-        }).fail(function(data) {
-          console.log("tokst ekki að displayja hver á að gera")
-          
-
-        });
-}
 
 function whosTurnIsItAnyway(){
 $.ajax({
@@ -262,7 +237,7 @@ $(document).ready(function()
         row = 2;
         col = 2;
       }
-      
+      updateWin();
         $.ajax({
 			       type: "POST",
 			       url: "/api/v1/play/row/col",
@@ -270,7 +245,7 @@ $(document).ready(function()
 			 }).done(function(data) {
                   displayIt();
 				}).fail(function(data) {			
-          stateid();
+         console.log("feil a leik");
 				});
 				eve.preventDefault();
 
