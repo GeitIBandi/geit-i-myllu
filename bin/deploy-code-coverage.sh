@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -o errexit #abort if any command fails
 
+git config user.name "jacocoTestReport"
+git config user.email ""
+
 rm -fr /tmp/reports
 rm -fr /tmp/geit-i-myllu
 cp -a build/reports /tmp
