@@ -180,14 +180,14 @@ function stateid(){
           {
             //alert("X vann")
             $("#x_win").empty().append("&nbsp;"+xwon+"&nbsp;");
-            xwon++
-            var notagain = true;
+            xwon++;
+            alert("X wins");
           }
           else if(data == 4)
           {
             //alert("O vann")
-            $("#o_win").empty().append("&nbsp;"+xwon+"&nbsp;");
-            owon++
+            $("#o_win").empty().append("&nbsp;"+owon+"&nbsp;");
+            owon++;
             alert("O wins");
           }
           else if(data == 5)
@@ -229,8 +229,8 @@ $.ajax({
 $(document).ready(function() 
 {
              $.ajax({
-            type: "POST",// form.attr('method'),
-            url: "/api/v1/reset",//form.att( 
+            type: "POST",
+            url: "/api/v1/reset",
               data: null
           }).done(function(){
             displayIt();
