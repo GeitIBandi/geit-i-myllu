@@ -33,12 +33,12 @@ import spark.servlet.SparkApplication;
             }
         });
 
-<span class="nc" id="L36">        post(new Route(API_URL + &quot;/play/:row/:col&quot;) {</span>
+<span class="nc" id="L36">        post(new Route(API_URL + &quot;/play/row/col&quot;) {</span>
             @Override
             public Object handle(Request request, Response response) {
                 try {
-<span class="nc" id="L40">                    game.play(Integer.parseInt(request.params(&quot;:row&quot;)),</span>
-                        Integer.parseInt(request.params(&quot;:col&quot;)));
+<span class="nc" id="L40">                    game.play(Integer.parseInt(request.queryParams(&quot;row&quot;)),</span>
+                    Integer.parseInt(request.queryParams(&quot;col&quot;)));
                 }
 <span class="nc" id="L43">                catch (IllegalArgumentException e) {</span>
 <span class="nc" id="L44">                    response.status(403);</span>
