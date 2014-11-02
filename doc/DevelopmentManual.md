@@ -19,7 +19,7 @@ To work with the source for the project, we use git. The developer can install i
 
 ##Access to source control
 
-The developer needs to create a github account if one doesn't exist. Then the public key for SSH access must be added to that account from the machine that the code is cloned to. Information about these steps can be found here: [https://help.github.com/articles/generating-ssh-keys/]()
+The developer needs to create a github account if one doesn't exist. Then the public key for SSH access must be added to that account from the machine that the code is cloned to. Information about these steps can be found here: [https://help.github.com/articles/generating-ssh-keys/](https://help.github.com/articles/generating-ssh-keys/)
 
 You can retrieve a clone of the game to your local repository with the following command:
 
