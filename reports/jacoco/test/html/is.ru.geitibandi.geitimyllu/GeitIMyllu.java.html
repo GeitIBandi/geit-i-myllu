@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GeitIMyllu.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">geit-i-myllu</a> &gt; <a href="index.source.html" class="el_package">is.ru.geitibandi.geitimyllu</a> &gt; <span class="el_source">GeitIMyllu.java</span></div><h1>GeitIMyllu.java</h1><pre class="source lang-java linenums">package is.ru.geitibandi.geitimyllu;
+
+// This class handles a game of tic-tac-toe
+public class GeitIMyllu {
+
+    /////////////// MANDATORY METHODS ///////////////
+    // The following methods must be implemented to get at least a working version
+    // of the game
+    private char[][] board;
+    private int gameState;
+    private int turn;
+    private int playedGames;
+    private int gamesWonByPlayerX;
+    private int gamesWonByPlayerO;
+    private int ties;
+
+    // Constructor - sets up a new game
+<span class="fc" id="L18">    public GeitIMyllu() {</span>
+<span class="fc" id="L19">        board = new char[3][3];</span>
+<span class="fc" id="L20">        initializeBoard();</span>
+<span class="fc" id="L21">        gameState = 1;</span>
+<span class="fc" id="L22">        turn = 0;</span>
+<span class="fc" id="L23">        playedGames = 0;</span>
+<span class="fc" id="L24">        gamesWonByPlayerX = 0;</span>
+<span class="fc" id="L25">        gamesWonByPlayerO = 0;</span>
+<span class="fc" id="L26">        ties = 0;</span>
+<span class="fc" id="L27">    }</span>
+
+    // Initialze board...
+    private void initializeBoard()
+    {
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        for (int i = 0; i &lt; 3; i++)</span>
+        {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            for (int j = 0; j &lt; 3; j++)</span>
+            {
+<span class="fc" id="L36">                setBoard(i, j, '-');</span>
+            }
+        }
+<span class="fc" id="L39">    }</span>
+
+    // Function to set board at i, j to given value
+    private void setBoard(int row, int col, char value)
+    {
+<span class="fc" id="L44">        board[row][col] = value;</span>
+<span class="fc" id="L45">    }</span>
+
+    // Return the state of the board, as a string. Each character represents a cell
+    // on the board and is either 'X', 'O' or '-'. The first three characters
+    // represent the top row, the next three the middle row and the last three
+    // the bottom row.
+    public String boardAsString() {
+<span class="fc" id="L52">        String stringBoard = &quot;&quot;;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (int i = 0; i &lt; 3; i++)</span>
+        {
+<span class="fc bfc" id="L55" title="All 2 branches covered.">            for (int j = 0; j &lt; 3; j++)</span>
+            {
+<span class="fc" id="L57">                stringBoard += getCell(i, j);</span>
+            }
+        }
+<span class="fc" id="L60">        return stringBoard;</span>
+    }
+
+    // Return the owner of the cell at the given row and column
+    // Returns either 'X', 'O' or '-'
+    public char getCell(int row, int col) {
+<span class="fc" id="L66">        return (board[row][col]);</span>
+    }
+
+    // Return next gamestate (3, 4, 5) if game is over
+    private int updateGameState() {
+<span class="fc bfc" id="L71" title="All 4 branches covered.">        if (!gameWon() &amp;&amp; boardFull()) {</span>
+<span class="fc" id="L72">            ties++;</span>
+<span class="fc" id="L73">            return 5;</span>
+        }
+<span class="pc bpc" id="L75" title="1 of 4 branches missed.">        else if (gameWon() &amp;&amp; getGameState() == 1) {</span>
+<span class="fc" id="L76">            gamesWonByPlayerX++;</span>
+<span class="fc" id="L77">            return 3;</span>
+        }
+<span class="pc bpc" id="L79" title="3 of 4 branches missed.">        else if (gameWon() &amp;&amp; getGameState() == 2) {</span>
+<span class="nc" id="L80">            gamesWonByPlayerO++;</span>
+<span class="nc" id="L81">            return 4;</span>
+        }
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        else if (getGameState() == 1)</span>
+<span class="fc" id="L84">            return 2;</span>
+<span class="fc" id="L85">        return 1;</span>
+    }
+
+    // Return true if same X or O in all arguments
+    private boolean checkRowColDiag(char c1, char c2, char c3) {
+<span class="fc bfc" id="L90" title="All 6 branches covered.">        return ((c1 != '-') &amp;&amp; (c1 == c2) &amp;&amp; (c2 == c3));</span>
+    }
+
+    // Return true if game won by full diogonal line
+    public boolean checkDiagForWin() {
+<span class="pc bpc" id="L95" title="1 of 4 branches missed.">        return ((checkRowColDiag(getCell(0, 0), getCell(1, 1), getCell(2, 2)))</span>
+             || (checkRowColDiag(getCell(0, 2), getCell(1, 1), getCell(2, 0))));
+    }
+
+    // Return true if game won by full colum
+    public boolean checkColsForWin() {
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        for (int i = 0; i &lt; 3; i++)</span>
+        {
+<span class="fc bfc" id="L103" title="All 2 branches covered.">            if (checkRowColDiag(getCell(0, i), getCell(1, i), getCell(2, i)))</span>
+<span class="fc" id="L104">            return true;</span>
+        }
+<span class="fc" id="L106">        return false;</span>
+    }
+
+    // Return true if game won by full row
+    public boolean checkRowsForWin() {
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        for (int i = 0; i &lt; 3; i++)</span>
+        {
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (checkRowColDiag(getCell(i, 0), getCell(i, 1), getCell(i, 2)))</span>
+<span class="fc" id="L114">            return true;</span>
+        }
+<span class="fc" id="L116">        return false;</span>
+    }
+
+    // Returns true if board is full
+    public boolean boardFull() {
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        for (int i = 0; i &lt; 3; i++)</span>
+        {
+<span class="fc bfc" id="L123" title="All 2 branches covered.">            for (int j = 0; j &lt; 3; j++)</span>
+            {
+<span class="fc bfc" id="L125" title="All 2 branches covered.">                if (getCell(i, j) == '-')</span>
+<span class="fc" id="L126">                    return false;</span>
+            }
+        }
+<span class="fc" id="L129">        return true;</span>
+    }
+
+    // Return true if game is won
+    public boolean gameWon() {
+<span class="fc bfc" id="L134" title="All 6 branches covered.">        return (checkRowsForWin() || checkColsForWin() || checkDiagForWin());</span>
+    }
+
+    // Returns char of player playing currently or winner
+    public char playerMark() {
+<span class="pc bpc" id="L139" title="1 of 4 branches missed.">        if (getGameState() == 1 || getGameState() == 3)</span>
+<span class="fc" id="L140">            return 'X';</span>
+<span class="pc bpc" id="L141" title="1 of 4 branches missed.">        else if (getGameState() == 2 || getGameState() == 4)</span>
+<span class="fc" id="L142">            return 'O';</span>
+        else
+<span class="fc" id="L144">            return '-';</span>
+    }
+
+    // Mark the cell at the given row and column with the current player's mark
+    // Throws IllegalArgumentException if cell is already taken or it's game over
+    public void play(int row, int col) {
+<span class="pc bpc" id="L150" title="3 of 8 branches missed.">        if (row &lt; 0 || row &gt; 2 || col &lt; 0 || col &gt; 2) {</span>
+<span class="fc" id="L151">            throw new IllegalArgumentException(&quot;Cell not on board&quot;);</span>
+        }
+<span class="fc bfc" id="L153" title="All 2 branches covered.">            else if (getCell(row, col) != '-') {</span>
+<span class="fc" id="L154">            throw new IllegalArgumentException(&quot;Cell occupied&quot;);</span>
+        }
+<span class="pc bpc" id="L156" title="2 of 4 branches missed.">        else if (gameWon() || boardFull()) {</span>
+<span class="nc" id="L157">            throw new IllegalArgumentException(&quot;Game over&quot;);</span>
+        }
+        else {
+<span class="fc" id="L160">            setBoard(row, col, playerMark());</span>
+<span class="fc" id="L161">            setGameState(updateGameState());</span>
+<span class="fc" id="L162">            turn++;</span>
+        }
+<span class="fc" id="L164">    }</span>
+
+    // Reset the current game
+    public void resetGame() {
+<span class="fc" id="L168">        initializeBoard();</span>
+<span class="fc" id="L169">        setGameState(1);</span>
+<span class="fc" id="L170">        turn = 0;</span>
+<span class="fc" id="L171">        playedGames++;</span>
+<span class="fc" id="L172">    }</span>
+
+    // Returns the current state of the game
+    // 1 - The game is running and it's player X's turn
+    // 2 - The game is running and it's player O's turn
+    // 3 - The game is over and player X won
+    // 4 - The game is over and player O won
+    // 5 - The game is over and it was a tie
+    public int getGameState() {
+<span class="fc" id="L181">        return gameState;</span>
+    }
+
+    // Set function for gameState
+    private void setGameState(int value) {
+<span class="fc" id="L186">        gameState = value;</span>
+<span class="fc" id="L187">    }</span>
+
+
+    /////////////// OPTIONAL METHODS ///////////////
+    // The following methods do not need to be implemented unless there's spare time
+
+    // Return the number of the current turn
+    public int getTurn() {
+<span class="fc" id="L195">        return turn;</span>
+    }
+
+    // Return the current player, 'X', 'O' or 'N' if it's currently game over
+    public char getCurrentPlayer() {
+<span class="pc bpc" id="L200" title="2 of 4 branches missed.">        if (!gameWon() &amp;&amp; !boardFull())</span>
+<span class="fc" id="L201">            return playerMark();</span>
+<span class="nc" id="L202">        return 'N';</span>
+    }
+
+    // Return how many games have been played since we started
+    public int getPlayedGames() {
+<span class="fc" id="L207">        return playedGames; </span>
+    }
+
+    // Return how many games player X has won since we started
+    public int getGamesWonByPlayerX() {
+<span class="fc" id="L212">        return gamesWonByPlayerX;</span>
+    }
+
+    // Return how many games player O has won since we started
+    public int getGamesWonByPlayerO() {
+<span class="fc" id="L217">        return gamesWonByPlayerO;</span>
+    }
+
+    // Return how many games ended in a tie since we started
+    public int getTies() {
+<span class="fc" id="L222">        return ties;</span>
+    }
+
+    // Test function, entirely optional - not used except for debugging
+    public static void main(String[] args) {
+<span class="nc" id="L227">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
