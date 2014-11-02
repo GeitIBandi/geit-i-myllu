@@ -85,8 +85,14 @@ task seleniumXvfb(type: Test, dependsOn: installApp) {
     }
 }
 
+test {
+    jacoco {
+        excludes = ["is.ru.geitibandi.geitimyllu.GeitIMylluWeb"]
+    }
+}
+
 jacocoTestReport {
-    dependsOn check
+    dependsOn check, seleniumXvfb
     group = "Reporting"
     description = "Generate Jacoco coverage reports after running tests."
     additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
