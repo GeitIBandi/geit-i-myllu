@@ -57,4 +57,4 @@ If everything is ok and the continuous deployment process is set up correctly, t
 ##Other necessary dependencies
 If the developer is working directly on deployment, then there are two tools used, the Heroku Toolbelt, and the Travis command line tool. How to install these is described in the Administration Manual, but both of them need Ruby to work, and more specifically the Ruby development package:
 
-    $sudo apt-get install ruby-dev
+    $ sudo apt-get install ruby-dev
