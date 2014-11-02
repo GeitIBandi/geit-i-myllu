@@ -6,9 +6,7 @@ some code
 ```
 
 - item 3
-
 ```
 more code
 ```
-
 - item 4
