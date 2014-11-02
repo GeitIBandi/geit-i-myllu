@@ -24,7 +24,7 @@ public class PlayOneGameXWinsTest {
 
   @Test
   public void testPlayOneGameXWins() throws Exception {
-    driver.get(baseUrl + "/");
+    driver.get(baseUrl);
     for (int second = 0;; second++) {
     	if (second >= 60) fail("timeout");
     	try { if ("Tic Tac Toe1".equals(driver.findElement(By.cssSelector("h1.span3")).getText())) break; } catch (Exception e) {}
