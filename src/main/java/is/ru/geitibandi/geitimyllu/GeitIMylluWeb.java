@@ -33,12 +33,12 @@ public class GeitIMylluWeb implements SparkApplication {
             }
         });
 
-        post(new Route(API_URL + "/play/:row/:col") {
+        post(new Route(API_URL + "/play/row/col") {
             @Override
             public Object handle(Request request, Response response) {
                 try {
-                    game.play(Integer.parseInt(request.params(":row")),
-                        Integer.parseInt(request.params(":col")));
+                    game.play(Integer.parseInt(request.queryParams("row")),
+                    Integer.parseInt(request.queryParams("col")));
                 }
                 catch (IllegalArgumentException e) {
                     response.status(403);

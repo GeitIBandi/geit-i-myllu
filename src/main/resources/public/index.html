@@ -1,11 +1,293 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>Geit Í Myllu</title>
-<meta charset="UTF-8">
+  <title>Geitin</title>
+   <style>
+/*******tic-tac-toe******/
+
+#tic-tac-toe .disable {text-transform:uppercase; font-size:30px; font-family:Georgia, "Times New Roman", Times, serif}
+#tic-tac-toe #game li {float:left; padding:0; list-style:none; text-align:center; margin-bottom:20px; color:#fff; height:60px; line-height:60px; width:60px; font-size:40px; color:#ccc}
+#tic-tac-toe #game li.disable{color:#fff}
+#tic-tac-toe #game {float:left; padding:0; clear:both}
+.new_span {width:226px}
+/*#tic-tac-toe #reset { padding:5px 10px; color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:20px; clear:both; cursor:pointer; float:left; text-align:center; text-transform:uppercase; outline:none; width:204px}*/
+
+.input-prepend span.pre_text {width:55px}
+.input-prepend .span1{width:93px}
+.input-prepend {margin-bottom:10px}
+.clr {clear:both; height:0}
+
+#tic-tac-toe h1 {text-align:center; font-size:28px}
+#tic-tac-toe li::-moz-selection {background:none;color:#000;}
+#tic-tac-toe li::-webkit-selection {background:none;color:#000;}
+#tic-tac-toe {width:220px; margin:0 auto}
+
+.input-append .win_times {background:#fff; width:101px; padding:5px}
+.input-append .win_text {width:52px}
+
+body {
+
+/*margin-bottom: 60px;*/
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
+}
+
+.footer {
+position: absolute;
+bottom: 0;
+width: 100%;
+
+height: 60px;
+background-color: #f5f5f5;
+}
+
+.container {
+width: auto;
+max-width: 680px;
+padding: 0 15px;
+}
+.container .text-muted {
+margin: 20px 0;
+color: #777;
+}
+
+</style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.8.10/themes/smoothness/jquery-ui.css" >
+ 
+
+</head>
+  
+  <script src="../../../www/js/mylla.js"></script>
+  <meta charset="utf-8">
 </head>
 <body>
-Geit Í Myllu web front end
-<br/>
-deployment test
+  <div id="tic-tac-toe">
+    <div class="span3 new_span">
+      <div class="row">
+        <h1 class="span3">Tic Tac Toe1</h1>
+        <div class="span3">
+          <div class="input-prepend input-append">
+            <span class="add-on win_text">O won</span><strong id="o_win" class="win_times add-on">0</strong><span class="add-on">time(s)</span>
+          </div>
+          <div class="input-prepend input-append">
+            <span class="add-on win_text">X won</span><strong id="x_win" class="win_times add-on">0</strong><span class="add-on">time(s)</span>
+          </div>
+        </div>
+      </div>
+      <ul class="row" id="game">
+        <li id="one" class="btn span1" >+</li>
+        <li id="two" class="btn span1">+</li>
+        <li id="three" class="btn span1">+</li>
+        <li id="four" class="btn span1">+</li>
+        <li id="five" class="btn span1">+</li>
+        <li id="six" class="btn span1">+</li>
+        <li id="seven" class="btn span1">+</li>
+        <li id="eight" class="btn span1">+</li>
+        <li id="nine" class="btn span1">+</li>
+      </ul>
+      <div class="clr"></div>
+      <div class="row"><a href="#" id="reset" class="btn-success btn span3" >Restart</a></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="container">
+      <p class="text-muted">Copyright © Geit Í Bandi 2014</p>
+    </div>
+  </div>
 </body>
 </html>
+
+
+
+<script type="text/javascript">
+       var row;
+       var col;
+       var playerturn;
+       var xwon = 1;
+       var owon = 1;
+       var yubb = "yubb";
+function updateWin(){
+  //won og uppfæra
+   $.ajax({
+      type: "GET",
+      url: "/api/v1/won",
+
+      data: null
+       }).done(function(data) {
+        console.log("updateWin(): " + data)
+        }).fail(function(data) {
+          console.log("tokst ekki að updateWin()")          
+
+        });
+
+}
+
+
+function displayIt(){
+  $.ajax({
+      type: "GET",
+      url: "/api/v1/board",
+
+      data: null
+       }).done(function(data) {
+         $('#one').empty().append(data[0]);
+         $('#two').empty().append(data[1]);
+         $('#three').empty().append(data[2]);
+         $('#four').empty().append(data[3]);
+         $('#five').empty().append(data[4]);
+         $('#six').empty().append(data[5]);
+         $('#seven').empty().append(data[6]);
+         $('#eight').empty().append(data[7]);
+         $('#nine').empty().append(data[8]);
+         // console.log(data[0]+data[1]+data[2])
+        }).fail(function(data) {
+          console.log("tokst ekki að displayja boardið")
+          
+
+        });
+}
+function stateid(){
+  /*
+      1 - The game is running and it’s player X’s turn
+      2 - The game is running and it’s player O’s turn
+      3 - The game is over and player X won
+      4 - The game is over and player O won
+      5 - The game is over and it was a tie
+*/
+  $.ajax({
+      type: "GET",
+      url: "/api/v1/state",
+
+      data: null
+       }).done(function(data) {
+          console.log("stateid() = state " + data)
+          if(data == 3 && yubb == "yubb")
+          {
+            $("#x_win").empty().append(xwon);
+            xwon++;
+            alert("X wins");
+            yubb = "nobb";
+          }
+          else if(data == 4 && yubb == "yubb")
+          {
+            //alert("O vann")
+            $("#o_win").empty().append(owon);
+            owon++;
+            alert("O wins");
+            yubb = "nobb";
+          }
+          else if(data == 5)
+          {
+            alert("draw")
+          }
+          else{
+            alert("abbababb clicked already")
+          }
+        }).fail(function(data) {
+          console.log("tokst ekki að displayja hver á að gera")
+          
+
+        });
+}
+
+function whosTurnIsItAnyway(){
+$.ajax({
+      type: "GET",
+      url: "/api/v1/whosturn",
+
+      data: null
+       }).done(function(data) {
+           console.log(" whosTurnIsItAnyway() = playerturn: " +data)
+          
+        }).fail(function(data) {
+          console.log("tokst ekki að displayja hver á að gera")
+        });
+}
+
+$(document).ready(function() 
+{
+             $.ajax({
+            type: "POST",
+            url: "/api/v1/reset",
+              data: null
+          }).done(function(){
+            displayIt();
+          });
+
+ displayIt();
+
+    $('#game li').click(function(eve)
+    {
+   
+      lc = null;
+      var lc = eve.target.id;
+      console.log("hvað er lc: " + lc)
+      if(lc == "one")
+      {
+        row = 0;
+        col = 0;
+      }
+      else if(lc == "two" ){
+        row = 0;
+        col = 1;
+      }
+      else if(lc == "three"){
+        row = 0;
+        col = 2;
+     }
+      else if(lc == "four"){
+        row = 1;
+        col = 0;
+      }
+      else if(lc == "five"){
+        row = 1;
+        col = 1;
+     }
+      else if(lc == "six"){
+        row = 1;
+        col = 2;
+    }
+      else if(lc == "seven"){
+        row = 2;
+        col = 0;
+      }
+      else if(lc == "eight"){
+        row = 2;
+        col = 1;
+      }
+      else if(lc == "nine"){
+        row = 2;
+        col = 2;
+      }
+      
+        $.ajax({
+			       type: "POST",
+			       url: "/api/v1/play/row/col",
+              data: "row="+row+"&col="+col
+			 }).done(function(data) {
+                  displayIt();
+				}).fail(function(data) {			
+          stateid();
+				});
+				eve.preventDefault();
+
+			});
+
+         $('#reset').click(function(eve){
+             $.ajax({
+            type: "POST",
+            url: "/api/v1/reset",
+              data: null
+          }).done(function(){
+            yubb = "yubb";
+            displayIt();
+          });
+        eve.preventDefault();
+
+    });
+});
+
+</script> 
