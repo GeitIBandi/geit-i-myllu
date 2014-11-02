@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -o errexit #abort if any command fails
 
-git config user.name "jacocoTestReport"
-git config user.email ""
+git config --global user.email "freyrb12@ru.is"
+git config --global user.name "Freyr Bergsteinsson"
 
 rm -fr /tmp/reports
 rm -fr /tmp/geit-i-myllu
