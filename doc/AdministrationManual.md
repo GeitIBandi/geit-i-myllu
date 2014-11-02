@@ -1,4 +1,4 @@
-![](http://imgur.com/ElootDc.png){width: 200px;}
+![](http://imgur.com/S0arjXA.png)
 #Síðannarverkefni
 ##_Administration Manual_
 
