@@ -2,8 +2,8 @@ language: java
 jdk:
 - openjdk7
 script:
-- ./gradlew check
-- ./gradlew seleniumXvfb && ./gradlew jacocoTestReport && bin/deploy-code-coverage.sh
+- ./gradlew check && ./gradlew seleniumXvfb && ./gradlew jacocoTestReport
+- bin/deploy-reports.sh
 deploy:
   provider: heroku
   api_key:
