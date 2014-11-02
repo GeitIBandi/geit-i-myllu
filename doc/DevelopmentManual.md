@@ -19,7 +19,7 @@ To work with the source for the project, we use git. The developer can install i
 
 ##Access to source control
 
-The developer needs to create a github account if one doesn't exist. Then the public key for SSH access must be added to that account from the machine that the code is cloned to. Information about these steps can be found here: [https://help.github.com/articles/generating-ssh-keys/]()
+The developer needs to create a github account if one doesn't exist. Then the public key for SSH access must be added to that account from the machine that the code is cloned to. Information about these steps can be found here: [https://help.github.com/articles/generating-ssh-keys/](https://help.github.com/articles/generating-ssh-keys/)
 
 You can retrieve a clone of the game to your local repository with the following command:
 
@@ -57,4 +57,4 @@ If everything is ok and the continuous deployment process is set up correctly, t
 ##Other necessary dependencies
 If the developer is working directly on deployment, then there are two tools used, the Heroku Toolbelt, and the Travis command line tool. How to install these is described in the Administration Manual, but both of them need Ruby to work, and more specifically the Ruby development package:
 
-    $sudo apt-get install ruby-dev
+    $ sudo apt-get install ruby-dev
