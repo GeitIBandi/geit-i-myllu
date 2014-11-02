@@ -224,7 +224,7 @@ public class GeitIMylluTest {
 
     @Test
     public void testGameOverException() {
-        boolean thrown = false;
+        boolean exceptionThrown = false;
         game.play(1, 0);
         game.play(0, 0);
         game.play(1, 2);
@@ -234,9 +234,9 @@ public class GeitIMylluTest {
         try {
             game.play(2, 0);
         } catch (IllegalArgumentException e) {
-            thrown = true;
+            exceptionThrown = true;
         }
-        assertTrue(thrown);
+        assertTrue(exceptionThrown);
     }
 
     @Test
