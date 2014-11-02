@@ -221,4 +221,32 @@ public class GeitIMylluTest {
         game.play(2, 1);
         assertEquals(1, game.getTies());
     }
+
+    @Test
+    public void testGameOverException() {
+        boolean thrown = false;
+        game.play(1, 0);
+        game.play(0, 0);
+        game.play(1, 2);
+        game.play(1, 1);
+        game.play(0, 2);
+        game.play(2, 2);
+        try {
+            game.play(2, 0);
+        } catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
+    }
+
+    @Test
+    public void gameStateAfterPlayerOWins() {
+        game.play(1, 0);
+        game.play(0, 0);
+        game.play(1, 2);
+        game.play(1, 1);
+        game.play(0, 2);
+        game.play(2, 2);
+        assertEquals(4, game.getGameState());
+    }
 }
