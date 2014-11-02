@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="5.7">
-<file name="/home/freyrb/src/geit-i-myllu/src/test/java/is/ru/geitibandi/geitimyllu/GeitIMylluTest.java">
+<file name="/home/travis/build/GeitIBandi/geit-i-myllu/src/test/java/is/ru/geitibandi/geitimyllu/GeitIMylluTest.java">
 </file>
 </checkstyle>
