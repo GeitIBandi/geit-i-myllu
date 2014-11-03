@@ -96,12 +96,16 @@ If for some reason you need to deploy the game directly to Heroku, effectively b
 	  $ heroku keys:add
 <li>Deploy app to heroku:</li>
 	  $ git push heroku master
+</ol>
 
 ##How to run
 The app is started when deployed to Heroku. Go to http://geit-i-myllu.herokuapp.com to verify it is up and running. This can be done using the Heroku Toolbelt by running ‘heroku open’
 
 ##How to maintain
 Maintaining the app is mostly monitoring the logs to see what is going on.
+
+###Test reports
+Test reports and code coverage is automatically deployed to our GitHub pages site. Visit [http://geitibandi.github.io/geit-i-myllu/](http://geitibandi.github.io/geit-i-myllu/) to review the generated reports.
 
 ###Travis
 To see the build output of Travis, go to https://travis-ci.org/GeitIBandi/geit-i-myllu. To see the output of an older build, select one from the build history at https://travis-ci.org/GeitIBandi/geit-i-myllu/builds.
@@ -118,4 +122,3 @@ To check the logs on the production server:
 ```
 
 Everytime a new build is started, it is deployed to the staging server. If anything goes wrong and the build fails, it is also possible to look at the differences between the staging server and the production server.
-
