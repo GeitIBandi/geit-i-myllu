@@ -1,9 +1,8 @@
-HUGB sýning:
+#HUGB sýning
 
+Pusha kóða sem brýtur build (compile error):
 
-Pusha kóða sem brýtur build.      (compile error)
-
-```
+``` diff
 --- a/src/main/java/is/ru/geitibandi/geitimyllu/GeitIMyllu.java
 +++ b/src/main/java/is/ru/geitibandi/geitimyllu/GeitIMyllu.java
 @@ -141,7 +141,7 @@ public class GeitIMyllu {
@@ -15,16 +14,16 @@ Pusha kóða sem brýtur build.      (compile error)
      }
 ```
 
-Keyra ./gradlew check - sjá buildið faila:
+Keyra `./gradlew check` - sjá buildið faila:
 
 
 ```
 :compileJava FAILED
 ```
 
-Pusha kóða sem failar unit test.  (unit test fail)
+Pusha kóða sem failar unit test:
 
-```
+``` diff
 --- a/src/main/java/is/ru/geitibandi/geitimyllu/GeitIMyllu.java
 +++ b/src/main/java/is/ru/geitibandi/geitimyllu/GeitIMyllu.java
 @@ -141,7 +141,7 @@ public class GeitIMyllu {
@@ -36,16 +35,16 @@ Pusha kóða sem failar unit test.  (unit test fail)
      }
 ```
 
-  - Keyra ./gradlew check - sjá build faila.
+Keyra `./gradlew check` - sjá build faila:
 
 ```
     23 tests completed, 1 failed
     :test FAILED
 ```
 
-Pusha kóða sem brýtur checkstyle. (code inspection failure)
+Pusha kóða sem brýtur checkstyle (code inspection failure):
 
-```
+``` diff
 --- a/src/main/java/is/ru/geitibandi/geitimyllu/GeitIMyllu.java
 +++ b/src/main/java/is/ru/geitibandi/geitimyllu/GeitIMyllu.java
 @@ -136,7 +136,7 @@ public class GeitIMyllu {
@@ -58,8 +57,16 @@ Pusha kóða sem brýtur checkstyle. (code inspection failure)
          else if (getGameState() == 2 || getGameState() == 4)
              return 'O';
 ```
-  - "Gleyma" að gera ./gradle check, pusha á repo.
-  - Sjá Travis build faila:
+
+"Gleyma" að gera ./gradle check, pusha á repo.
+
+``` bash
+$ git add src/main/java/is/ru/geitibandi/geitimyllu/GeitIMyllu.java
+$ git commit -m "Totally nothing wrong with this code. Nope."
+$ git push
+```
+
+Sjá Travis build faila:
 
 ```
 [ant:checkstyle] /Users/fresnik/Dropbox/HR/20143/HUGB/geit-i-myllu/src/main/java/is/ru/geitibandi/geitimyllu/GeitIMyllu.java:139:11: 'if' is not followed by whitespace.
@@ -72,9 +79,9 @@ Laga style villuna.
 
 Pusha kóða sem bætir við/lagar virkni. Byrja á að opna code coverage (http://geitibandi.github.io/geit-i-myllu/) í tveim gluggum.
 
-```
-$ git checkout master
+``` bash
 $ git merge developer
+$ git push
 ```
 
 Sjá tölvupóst berast frá Travis um að build hafi tekist.
