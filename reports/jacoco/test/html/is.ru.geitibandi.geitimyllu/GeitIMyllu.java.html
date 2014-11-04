@@ -72,13 +72,13 @@ public class GeitIMyllu {
 <span class="fc" id="L72">            ties++;</span>
 <span class="fc" id="L73">            return 5;</span>
         }
-<span class="pc bpc" id="L75" title="1 of 4 branches missed.">        else if (gameWon() &amp;&amp; getGameState() == 1) {</span>
+<span class="fc bfc" id="L75" title="All 4 branches covered.">        else if (gameWon() &amp;&amp; getGameState() == 1) {</span>
 <span class="fc" id="L76">            gamesWonByPlayerX++;</span>
 <span class="fc" id="L77">            return 3;</span>
         }
-<span class="pc bpc" id="L79" title="3 of 4 branches missed.">        else if (gameWon() &amp;&amp; getGameState() == 2) {</span>
-<span class="nc" id="L80">            gamesWonByPlayerO++;</span>
-<span class="nc" id="L81">            return 4;</span>
+<span class="pc bpc" id="L79" title="1 of 4 branches missed.">        else if (gameWon() &amp;&amp; getGameState() == 2) {</span>
+<span class="fc" id="L80">            gamesWonByPlayerO++;</span>
+<span class="fc" id="L81">            return 4;</span>
         }
 <span class="fc bfc" id="L83" title="All 2 branches covered.">        else if (getGameState() == 1)</span>
 <span class="fc" id="L84">            return 2;</span>
@@ -153,8 +153,8 @@ public class GeitIMyllu {
 <span class="fc bfc" id="L153" title="All 2 branches covered.">            else if (getCell(row, col) != '-') {</span>
 <span class="fc" id="L154">            throw new IllegalArgumentException(&quot;Cell occupied&quot;);</span>
         }
-<span class="pc bpc" id="L156" title="2 of 4 branches missed.">        else if (gameWon() || boardFull()) {</span>
-<span class="nc" id="L157">            throw new IllegalArgumentException(&quot;Game over&quot;);</span>
+<span class="pc bpc" id="L156" title="1 of 4 branches missed.">        else if (gameWon() || boardFull()) {</span>
+<span class="fc" id="L157">            throw new IllegalArgumentException(&quot;Game over&quot;);</span>
         }
         else {
 <span class="fc" id="L160">            setBoard(row, col, playerMark());</span>
