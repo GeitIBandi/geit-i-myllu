@@ -138,10 +138,10 @@ public class GeitIMyllu {
     public char playerMark() {
         if (getGameState() == 1 || getGameState() == 3)
             return 'X';
-        else if(getGameState() == 2 || getGameState() == 4)
+        else if (getGameState() == 2 || getGameState() == 4)
             return 'O';
         else
-            return '-';
+            return '=';
     }
 
     // Mark the cell at the given row and column with the current player's mark
