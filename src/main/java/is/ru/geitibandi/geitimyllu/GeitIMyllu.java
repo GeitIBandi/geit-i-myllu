@@ -138,7 +138,7 @@ public class GeitIMyllu {
     public char playerMark() {
         if (getGameState() == 1 || getGameState() == 3)
             return 'X';
-        else if(getGameState() == 2 || getGameState() == 4)
+        else if (getGameState() == 2 || getGameState() == 4)
             return 'O';
         else
             return '-';
