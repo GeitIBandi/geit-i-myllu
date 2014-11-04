@@ -42,7 +42,7 @@ Keyra `./gradlew check` - sjá build faila:
     :test FAILED
 ```
 
-Pusha kóða sem brýtur checkstyle (code inspection failure):
+Pusha kóða sem brýtur checkstyle (code inspection failure) og breytir útliti á síðu:
 
 ``` diff
 --- a/src/main/java/is/ru/geitibandi/geitimyllu/GeitIMyllu.java
@@ -56,6 +56,15 @@ Pusha kóða sem brýtur checkstyle (code inspection failure):
              return 'X';
          else if (getGameState() == 2 || getGameState() == 4)
              return 'O';
+--- a/src/main/resources/public/index.html
++++ b/src/main/resources/public/index.html
+@@ -30,6 +30,7 @@ body {
+/*margin-bottom: 60px;*/
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+ +background-color: #bada55;
+}
+
 ```
 
 "Gleyma" að gera ./gradle check, pusha á repo.
