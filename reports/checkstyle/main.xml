@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="5.7">
 <file name="/home/travis/build/GeitIBandi/geit-i-myllu/src/main/java/is/ru/geitibandi/geitimyllu/GeitIMyllu.java">
-<error line="141" column="16" severity="error" message="&apos;if&apos; is not followed by whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
 </file>
 <file name="/home/travis/build/GeitIBandi/geit-i-myllu/src/main/java/is/ru/geitibandi/geitimyllu/GeitIMylluWeb.java">
 </file>
